@@ -5,7 +5,7 @@ def newton(x0,epsilon,max_iter):
     xn = x0
     for n in range(0,max_iter):
         fxn = f(xn)
-        if abs(fxn) < epsilon:
+        if abs(fxn) <= epsilon:
             print('Found solution after',n,'iterations.')
             return xn
         print('Iteration',n,': x =',xn,'f(x) =',fxn)
@@ -19,7 +19,7 @@ def newton(x0,epsilon,max_iter):
     print('Exceeded maximum iterations. No solution found.')
     return None
 
-def approx (x0,lend, rend, epsilon):
+def approxN (x0,lend, rend, epsilon):
     f = lambda x: x**3+x**2-4*x-4
     Df = lambda x: 3*x**2+2*x-4
     D2f = lambda x: 6*x+2
@@ -36,6 +36,6 @@ def approx (x0,lend, rend, epsilon):
     if q >= 1:
         print("The method may not converge q =", q)
         return None
-    n= int(math.log2((math.log(l/epsilon)/math.log(1/q))+1)+1)
+    n= math.ceil((math.log2((math.log(l/epsilon)/math.log(1/q))+1)+1))
     print("The number of iterations apriori:", n)
     return n

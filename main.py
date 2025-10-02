@@ -8,9 +8,9 @@ def print_menu():
     print("2. Find root using Simple Iteration method")
     print("3. Exit")
 
-def Newton(inter,x0, epsilon):
+def Newton(x0,inter, epsilon):
     (l,r) = map(float, inter.split())
-    max_iter = newton.approx(x0, l, r, epsilon)
+    max_iter = newton.approxN(x0, l, r, epsilon)
     if max_iter is None:
         return [None, None]
     res = newton.newton(x0,epsilon,max_iter)
@@ -18,12 +18,13 @@ def Newton(inter,x0, epsilon):
     return [res, res_s]
 
 
-def Simple_iteration():
-    
-    x0 = float(input("Enter initial guess x0: "))
-    epsilon = float(input("Enter epsilon: "))
-    max_iter = int(input("Enter max iterations: "))
-    smpl_iter.simple_iteration(x0,epsilon,max_iter)
+def Simple_iteration(x0, inter, epsilon):
+    (l,r) = map(float, inter.split())
+    max_iter = smpl_iter.approxI(x0, l, r, epsilon)
+    if max_iter is None:
+        return None
+    res= smpl_iter.smpl_iter(x0,epsilon,max_iter)
+    return res
 
 def main():
     print_menu()
@@ -33,21 +34,29 @@ def main():
         inter = input("Enter interval [l, r]: ")
         x0 = float(input("Enter initial guess x0: "))
         epsilon = float(input("Enter epsilon: "))
-        result = Newton(inter,x0, epsilon)
+        result = Newton(x0,inter, epsilon)
         answ = result[0]
         scpy_res = result[1]
         if answ is not None:
             print("Root found:", answ)
+            print("Root found by scipy:", scpy_res)
         else:
             print("No root found.")
-            print("Scipy result:", scpy_res)
+            
 
     elif c == '2':
         print("Simple Iteration Method Selected.")
-        Simple_iteration()
+        inter = input("Enter interval [l, r]: ")
+        x0 = float(input("Enter initial guess x0: "))
+        epsilon = float(input("Enter epsilon: "))
+        result = Simple_iteration(x0,inter, epsilon)
+        if result is not None:
+            print("Root found:", result)
+        else:
+            print("No root found.")
 
     elif c == '3':
         print("Exiting the program.")
         return 0
-
+    return 0
 main()
