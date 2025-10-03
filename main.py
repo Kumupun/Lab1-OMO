@@ -43,7 +43,6 @@ def main():
         else:
             print("No root found.")
             
-
     elif c == '2':
         print("Simple Iteration Method Selected.")
         inter = input("Enter interval [l, r]: ")

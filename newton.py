@@ -32,10 +32,12 @@ def approxN (x0,lend, rend, epsilon):
         return None
     m1 = min(Df(lend), Df(rend))
     M2 = max(D2f(lend), D2f(rend))
+    print("m1 =", m1, "M2 =", M2)
     q=M2*l/(2*m1)
     if q >= 1:
         print("The method may not converge q =", q)
         return None
+    print("q =", q)
     n= math.ceil((math.log2((math.log(l/epsilon)/math.log(1/q))+1)+1))
     print("The number of iterations apriori:", n)
     return n
